@@ -96,7 +96,7 @@ btnConsultar.addEventListener("click", async () => {
         direccionViento.textContent = `Dirección del viento: ${obtenerDireccionViento(direccion)}`;
         humedad.textContent = `Humedad: ${humedadValue}%`;
 
-        if (humedadValue > 80) {
+        if (humedadValue > 75) {
             recomendacionhumedo.textContent =
                 "Recomendación: Ambiente muy húmedo.";
         }
