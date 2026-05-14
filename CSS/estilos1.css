@@ -185,3 +185,17 @@ footer {
     opacity: 1;
     transform: translateX(0);
 }
+
+@media (max-width: 768px) {
+
+    .imgPanorama,
+    .imgClima,
+    .imgRecomendaciones,
+    .imgImpacto,
+    .imgUltima {
+        width: 90%;
+        display: block;
+        float: none;
+        margin: 20px 0;
+    }
+}
