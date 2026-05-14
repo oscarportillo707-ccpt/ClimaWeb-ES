@@ -193,7 +193,7 @@ footer {
     .imgRecomendaciones,
     .imgImpacto,
     .imgUltima {
-        width: 90%;
+        width: 100%;
         display: block;
         float: none;
         margin: 20px 0;
