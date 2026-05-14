@@ -18,6 +18,13 @@ const horaActual = document.getElementById("horaActual");
 const velocidadViento = document.getElementById("velocidadViento");
 const direccionViento = document.getElementById("direccionViento");
 
+const humedad = document.getElementById("humedad");
+const recomendacionhumedo = document.getElementById("recomendacionhumedo");
+
+
+
+
+
 
 // COORDENADAS DE LOS 14 DEPARTAMENTOS
 const coordenadasDepartamentos = {
@@ -45,7 +52,7 @@ btnConsultar.addEventListener("click", async () => {
 
     const { lat, lon } = coordenadasDepartamentos[deptoSeleccionado];
 
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,precipitation_probability,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_max,weather_code,precipitation_probability_max&timezone=auto`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,precipitation_probability,weather_code,wind_speed_10m,wind_direction_10m,relative_humidity_2m&daily=temperature_2m_max,weather_code,precipitation_probability_max&timezone=auto`;
 
     try {
 
@@ -56,6 +63,7 @@ btnConsultar.addEventListener("click", async () => {
         const tempF = (tempC * 9 / 5) + 32;
         const lluvia = data.current.precipitation_probability;
         const codigoClima = data.current.weather_code;
+        const humedadValue = data.current.relative_humidity_2m;
 
         const velocidad = data.current.wind_speed_10m;
         const direccion = data.current.wind_direction_10m;
@@ -86,6 +94,20 @@ btnConsultar.addEventListener("click", async () => {
         precipitacion.textContent = `Precipitación: ${lluvia}%`;
         velocidadViento.textContent = `Velocidad del viento: ${velocidad} km/h`;
         direccionViento.textContent = `Dirección del viento: ${obtenerDireccionViento(direccion)}`;
+        humedad.textContent = `Humedad: ${humedadValue}%`;
+
+        if (humedadValue > 80) {
+            recomendacionhumedo.textContent =
+                "Recomendación: Ambiente muy húmedo.";
+        }
+        else if (humedadValue < 30) {
+            recomendacionhumedo.textContent =
+                "Recomendación: Ambiente seco.";
+        }
+        else {
+            recomendacionhumedo.textContent =
+                "Recomendación: Humedad en rango confortable.";
+        }
 
         if (clima === "Tormenta") {
 
